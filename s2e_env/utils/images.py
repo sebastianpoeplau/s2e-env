@@ -137,10 +137,10 @@ def get_image_descriptor(image_dir):
     try:
         with open(img_json_path, 'r') as f:
             ret = json.load(f)
-            _validate_version(ret, img_json_path)
             ret['path'] = os.path.join(image_dir, 'image.raw.s2e')
-
-            return ret
     except Exception:
         raise CommandError('Unable to open image description %s. Check that '
                            'the image exists, was built, or downloaded' % img_json_path)
+
+    _validate_version(ret, img_json_path)
+    return ret
